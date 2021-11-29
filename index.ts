@@ -126,7 +126,12 @@ function TodoApp(listElement: HTMLDivElement) {
   }
 
   function toggleTodo(todo: Todo): Todo {
-    
+    let new_todo : Todo = {
+      ...todo,
+      done: !todo.done,
+    };
+    // console.log(new_todo);
+    return new_todo;
   }
 
   function createTodo(text: string, rawTag: string = ""): Todo {
@@ -163,11 +168,23 @@ function TodoApp(listElement: HTMLDivElement) {
   }
 
   function completeAll(todos: Todo[]): Array<Todo & { done: true }> {
-    
+    return todos.map((value) => {
+        return {
+          ...value,
+          done: true
+        }
+      })
   }
+
+
 
   function getTotalDone(todos: Todo[]): number {
     
+    todos = todos.filter((val) => {
+      return val.done == true;
+    });
+    
+    return todos.length;
   }
 
   function render() {
